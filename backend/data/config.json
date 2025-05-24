@@ -1,0 +1,5 @@
+{
+  "target": "localhost",
+  "ports": "1-65535",
+  "source_file": "/srv/http"
+}

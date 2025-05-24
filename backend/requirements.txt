@@ -1,0 +1,15 @@
+python-nmap
+requests
+Flask
+Flask-Cors
+python-dotenv
+sqlalchemy
+multiprocessing-logging
+prompt_toolkit
+openai
+google-generativeai
+httpx
+py-solc-x
+web3
+eth-utils
+slither-analyzer

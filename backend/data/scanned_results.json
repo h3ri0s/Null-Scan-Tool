@@ -1,0 +1,126 @@
+{
+    "target": "127.0.0.1",
+    "port_scan": {
+        "tcp": {
+            "5000": {
+                "state": "open",
+                "reason": "syn-ack",
+                "name": "http",
+                "product": "Werkzeug httpd",
+                "version": "3.1.3",
+                "extrainfo": "Python 3.13.3",
+                "conf": "10",
+                "cpe": "cpe:/a:python:python:3.13.3"
+            },
+            "5990": {
+                "state": "open",
+                "reason": "syn-ack",
+                "name": "ssh",
+                "product": "",
+                "version": "",
+                "extrainfo": "protocol 2.0",
+                "conf": "10",
+                "cpe": ""
+            },
+            "3000": {
+                "state": "open",
+                "reason": "syn-ack",
+                "name": "http",
+                "product": "Samsung AllShare httpd",
+                "version": "",
+                "extrainfo": "",
+                "conf": "10",
+                "cpe": ""
+            },
+            "37333": {
+                "state": "open",
+                "reason": "syn-ack",
+                "name": "http",
+                "product": "Golang net/http server",
+                "version": "",
+                "extrainfo": "",
+                "conf": "10",
+                "cpe": "cpe:/a:golang:go"
+            }
+        }
+    },
+    "open_ports": {
+        "tcp/5000": {
+            "service": "http",
+            "product": "Werkzeug httpd",
+            "version": "3.1.3"
+        },
+        "tcp/5990": {
+            "service": "ssh",
+            "product": "",
+            "version": ""
+        },
+        "tcp/3000": {
+            "service": "http",
+            "product": "Samsung AllShare httpd",
+            "version": ""
+        },
+        "tcp/37333": {
+            "service": "http",
+            "product": "Golang net/http server",
+            "version": ""
+        }
+    },
+    "ssl_security_findings": {},
+    "http_security_findings": {
+        "tcp/5000": {
+            "service": "http",
+            "product": "Werkzeug httpd",
+            "version": "3.1.3",
+            "security_issues": [
+                "Missing HTTP header: Content-Security-Policy",
+                "Missing HTTP header: Strict-Transport-Security",
+                "Missing HTTP header: X-Frame-Options",
+                "Missing HTTP header: X-Content-Type-Options"
+            ],
+            "remediations": [
+                "Add Content-Security-Policy to HTTP responses",
+                "Add Strict-Transport-Security to HTTP responses",
+                "Add X-Frame-Options to HTTP responses",
+                "Add X-Content-Type-Options to HTTP responses"
+            ]
+        },
+        "tcp/3000": {
+            "service": "http",
+            "product": "Samsung AllShare httpd",
+            "version": "",
+            "security_issues": [
+                "Missing HTTP header: Content-Security-Policy",
+                "Missing HTTP header: Strict-Transport-Security",
+                "Missing HTTP header: X-Frame-Options",
+                "Missing HTTP header: X-Content-Type-Options"
+            ],
+            "remediations": [
+                "Add Content-Security-Policy to HTTP responses",
+                "Add Strict-Transport-Security to HTTP responses",
+                "Add X-Frame-Options to HTTP responses",
+                "Add X-Content-Type-Options to HTTP responses"
+            ]
+        },
+        "tcp/37333": {
+            "service": "http",
+            "product": "Golang net/http server",
+            "version": "",
+            "security_issues": [
+                "Missing HTTP header: Content-Security-Policy",
+                "Missing HTTP header: Strict-Transport-Security",
+                "Missing HTTP header: X-Frame-Options",
+                "Missing HTTP header: X-Content-Type-Options",
+                "Slowloris vulnerability detected"
+            ],
+            "remediations": [
+                "Add Content-Security-Policy to HTTP responses",
+                "Add Strict-Transport-Security to HTTP responses",
+                "Add X-Frame-Options to HTTP responses",
+                "Add X-Content-Type-Options to HTTP responses",
+                "Configure server to mitigate Slowloris attacks"
+            ]
+        }
+    },
+    "errors": []
+}
