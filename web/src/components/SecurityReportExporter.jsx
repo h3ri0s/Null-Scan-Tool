@@ -32,7 +32,7 @@ export default function SecurityReportExporter({
   const [isGenerating, setIsGenerating] = useState(false)
   const [progress, setProgress] = useState(0)
 
-  // Enhanced markdown parser with robust object handling
+  // Enhanced markdown parser to produce plain text
   const parseMarkdownToText = (input) => {
     if (!input) return ''
     
@@ -52,20 +52,17 @@ export default function SecurityReportExporter({
       // Configure marked renderer for plain text output
       const renderer = new marked.Renderer()
       
-      renderer.heading = (text, level) => {
-        const prefix = '#'.repeat(level)
-        return `\n${prefix} ${text}\n\n`
-      }
+      renderer.heading = (text, level) => `${'#'.repeat(level)} ${text}\n\n`
       renderer.paragraph = (text) => `${text}\n\n`
-      renderer.strong = (text) => `**${text}**`
-      renderer.em = (text) => `*${text}*`
+      renderer.strong = (text) => `${text}`
+      renderer.em = (text) => `${text}`
       renderer.list = (body, ordered) => `${body}\n`
       renderer.listitem = (text) => `- ${text.replace(/\n/g, ' ').trim()}\n`
-      renderer.code = (code, lang) => `\n\`\`\`${lang || ''}\n${code}\n\`\`\`\n`
-      renderer.codespan = (code) => `\`${code}\``
+      renderer.code = (code, lang) => `\n${code}\n\n`
+      renderer.codespan = (code) => `${code}`
       renderer.blockquote = (quote) => `> ${quote.trim()}\n\n`
-      renderer.link = (href, title, text) => `[${text}](${href})`
-      renderer.image = (href, title, text) => `![${text || 'Image'}](${href})`
+      renderer.link = (href, title, text) => `${text} (${href})`
+      renderer.image = (href, title, text) => `${text || 'Image'} (${href})`
       renderer.hr = () => '\n---\n\n'
       renderer.br = () => '\n'
       
@@ -73,10 +70,10 @@ export default function SecurityReportExporter({
         renderer: renderer,
         gfm: true,
         breaks: true,
-        sanitize: false
+        sanitize: true // Sanitize to remove HTML
       })
       
-      // Parse markdown and preserve formatting
+      // Parse markdown and clean up
       return marked.parse(markdown)
         .replace(/ /g, ' ')
         .replace(/&/g, '&')
@@ -94,7 +91,7 @@ export default function SecurityReportExporter({
     }
   }
 
-  // Generate PDF with professional formatting
+  // Generate PDF with professional formatting using plain text
   const generatePDF = async () => {
     setIsGenerating(true)
     setProgress(0)
@@ -129,8 +126,7 @@ export default function SecurityReportExporter({
         
         doc.setFontSize(fontSize)
         doc.setFont('helvetica', 'normal')
-        const parsedText = parseMarkdownToText(text)
-        const paragraphs = parsedText.split('\n\n')
+        const paragraphs = text.split('\n\n')
         let currentY = y
         
         paragraphs.forEach((paragraph, index) => {
@@ -274,23 +270,23 @@ export default function SecurityReportExporter({
       const summaryText = `
 This comprehensive security assessment, conducted on ${currentDate}, provides a detailed analysis of network infrastructure and source code security.
 
-**Network Scan Results:**
+Network Scan Results:
 - Target System: ${networkConfig?.target || 'N/A'}
 - Open Ports Discovered: ${networkStats.openPorts}
 - SSL/TLS Security Issues: ${networkStats.sslIssues}
 - HTTP Security Issues: ${networkStats.httpIssues}
 
-**Code Review Results:**
+Code Review Results:
 - Total Files Analyzed: ${codeStats.totalFiles}
 - Successfully Reviewed: ${codeStats.completedFiles}
 - Review Failures: ${codeStats.errorFiles}
 - Review Type: ${getReviewTypeLabel(selectedReview)}
 - Success Rate: ${codeStats.totalFiles > 0 ? Math.round((codeStats.completedFiles / codeStats.totalFiles) * 100) : 0}%
 
-**Risk Assessment:**
+Risk Assessment:
 The overall security posture is rated as ${securityScore >= 80 ? 'EXCELLENT' : securityScore >= 60 ? 'SATISFACTORY' : 'NEEDS IMPROVEMENT'} based on identified vulnerabilities and code quality metrics.
 `
-      yPosition = addWrappedText(summaryText, margin, yPosition, maxWidth, 6)
+      yPosition = addWrappedText(parseMarkdownToText(summaryText), margin, yPosition, maxWidth, 6)
 
       const securityChart = await captureChart('security-score-chart')
       if (securityChart) {
@@ -365,13 +361,11 @@ The overall security posture is rated as ${securityScore >= 80 ? 'EXCELLENT' : s
             if (Array.isArray(findings.security_issues)) {
               findings.security_issues.forEach(issue => {
                 checkPageBreak(10)
-                const parsedIssue = parseMarkdownToText(issue)
-                yPosition = addWrappedText(`- ${parsedIssue}`, margin + 10, yPosition, maxWidth - 15, 5)
+                yPosition = addWrappedText(`- ${parseMarkdownToText(issue)}`, margin + 10, yPosition, maxWidth - 15, 5)
                 yPosition += 3
               })
             } else {
-              const parsedFindings = parseMarkdownToText(findings)
-              yPosition = addWrappedText(`- ${parsedFindings}`, margin + 10, yPosition, maxWidth - 15, 5)
+              yPosition = addWrappedText(`- ${parseMarkdownToText(findings)}`, margin + 10, yPosition, maxWidth - 15, 5)
             }
             yPosition += 10
           })
@@ -398,13 +392,11 @@ The overall security posture is rated as ${securityScore >= 80 ? 'EXCELLENT' : s
             if (Array.isArray(findings.security_issues)) {
               findings.security_issues.forEach(issue => {
                 checkPageBreak(10)
-                const parsedIssue = parseMarkdownToText(issue)
-                yPosition = addWrappedText(`- ${parsedIssue}`, margin + 10, yPosition, maxWidth - 15, 5)
+                yPosition = addWrappedText(`- ${parseMarkdownToText(issue)}`, margin + 10, yPosition, maxWidth - 15, 5)
                 yPosition += 3
               })
             } else {
-              const parsedFindings = parseMarkdownToText(findings)
-              yPosition = addWrappedText(`- ${parsedFindings}`, margin + 10, yPosition, maxWidth - 15, 5)
+              yPosition = addWrappedText(`- ${parseMarkdownToText(findings)}`, margin + 10, yPosition, maxWidth - 15, 5)
             }
             yPosition += 10
           })
@@ -460,8 +452,7 @@ The overall security posture is rated as ${securityScore >= 80 ? 'EXCELLENT' : s
             
             doc.setFont('helvetica', 'normal')
             doc.setFontSize(9)
-            const parsedResult = parseMarkdownToText(result.result)
-            yPosition = addWrappedText(parsedResult, margin, yPosition, maxWidth, 4)
+            yPosition = addWrappedText(parseMarkdownToText(result.result), margin, yPosition, maxWidth, 4)
             yPosition += 15
           } else if (result.status === 'error' && result.error) {
             checkPageBreak(20)
@@ -474,8 +465,7 @@ The overall security posture is rated as ${securityScore >= 80 ? 'EXCELLENT' : s
             
             doc.setFont('helvetica', 'normal')
             doc.setFontSize(9)
-            const parsedError = parseMarkdownToText(result.error)
-            yPosition = addWrappedText(parsedError, margin, yPosition, maxWidth, 4)
+            yPosition = addWrappedText(parseMarkdownToText(result.error), margin, yPosition, maxWidth, 4)
             yPosition += 15
           }
           
@@ -489,8 +479,7 @@ The overall security posture is rated as ${securityScore >= 80 ? 'EXCELLENT' : s
             
             doc.setFont('courier', 'normal')
             doc.setFontSize(8)
-            const sourceCode = parseMarkdownToText(zipFiles[filename])
-            yPosition = addWrappedText(sourceCode, margin, yPosition, maxWidth, 4)
+            yPosition = addWrappedText(parseMarkdownToText(zipFiles[filename]), margin, yPosition, maxWidth, 4)
             yPosition += 15
             doc.setFont('helvetica', 'normal')
           }
@@ -508,8 +497,7 @@ The overall security posture is rated as ${securityScore >= 80 ? 'EXCELLENT' : s
       addSectionHeader('Security Recommendations')
 
       const recommendations = generateRecommendations(networkResults, fileResults)
-      const parsedRecommendations = parseMarkdownToText(recommendations)
-      yPosition = addWrappedText(parsedRecommendations, margin, yPosition, maxWidth, 5)
+      yPosition = addWrappedText(parseMarkdownToText(recommendations), margin, yPosition, maxWidth, 5)
 
       const overviewChart = await captureChart('security-overview-chart')
       if (overviewChart) {
@@ -612,25 +600,25 @@ The overall security posture is rated as ${securityScore >= 80 ? 'EXCELLENT' : s
     if (networkResults && Object.keys(networkResults).length > 0) {
       if (networkResults.port_scan?.tcp && Object.keys(networkResults.port_scan.tcp).length > 0) {
         recommendations.push("## Network Security")
-        recommendations.push("- **Port Management**: Review and close unnecessary open ports to reduce attack surface.")
-        recommendations.push("- **Firewall Configuration**: Implement strict firewall rules to control traffic.")
-        recommendations.push("- **Service Hardening**: Regularly audit and update running services.")
+        recommendations.push("- Port Management: Review and close unnecessary open ports to reduce attack surface.")
+        recommendations.push("- Firewall Configuration: Implement strict firewall rules to control traffic.")
+        recommendations.push("- Service Hardening: Regularly audit and update running services.")
       }
       
       if (networkResults.ssl_security_findings && Object.keys(networkResults.ssl_security_findings).length > 0) {
         recommendations.push("## SSL/TLS Security")
-        recommendations.push("- **Cipher Suite Updates**: Use only strong, modern cipher suites (e.g., TLS 1.3).")
-        recommendations.push("- **Certificate Management**: Ensure certificates are valid and renewed timely.")
-        recommendations.push("- **Protocol Hardening**: Disable outdated protocols (e.g., SSLv2, SSLv3, TLSv1.0/1.1).")
-        recommendations.push("- **Certificate Transparency**: Implement monitoring for certificate transparency.")
+        recommendations.push("- Cipher Suite Updates: Use only strong, modern cipher suites (e.g., TLS 1.3).")
+        recommendations.push("- Certificate Management: Ensure certificates are valid and renewed timely.")
+        recommendations.push("- Protocol Hardening: Disable outdated protocols (e.g., SSLv2, SSLv3, TLSv1.0/1.1).")
+        recommendations.push("- Certificate Transparency: Implement monitoring for certificate transparency.")
       }
       
       if (networkResults.http_security_findings && Object.keys(networkResults.http_security_findings).length > 0) {
         recommendations.push("## HTTP Security")
-        recommendations.push("- **Security Headers**: Implement Content Security Policy (CSP), HSTS, and X-Frame-Options.")
-        recommendations.push("- **Method Restrictions**: Disable unnecessary HTTP methods (e.g., TRACE, OPTIONS).")
-        recommendations.push("- **Information Disclosure**: Prevent server version leaks in HTTP responses.")
-        recommendations.push("- **Cookie Security**: Use secure and HttpOnly cookie flags.")
+        recommendations.push("- Security Headers: Implement Content Security Policy (CSP), HSTS, and X-Frame-Options.")
+        recommendations.push("- Method Restrictions: Disable unnecessary HTTP methods (e.g., TRACE, OPTIONS).")
+        recommendations.push("- Information Disclosure: Prevent server version leaks in HTTP responses.")
+        recommendations.push("- Cookie Security: Use secure and HttpOnly cookie flags.")
       }
     }
 
@@ -638,24 +626,24 @@ The overall security posture is rated as ${securityScore >= 80 ? 'EXCELLENT' : s
       const stats = getCodeStats(fileResults)
       recommendations.push("## Code Security")
       if (stats.errorFiles > 0) {
-        recommendations.push("- **Error Resolution**: Investigate and resolve code review errors.")
-        recommendations.push("- **Access Control**: Verify file permissions and access controls.")
+        recommendations.push("- Error Resolution: Investigate and resolve code review errors.")
+        recommendations.push("- Access Control: Verify file permissions and access controls.")
       }
       if (stats.completedFiles > 0) {
-        recommendations.push("- **Code Improvements**: Apply recommended security enhancements.")
-        recommendations.push("- **Review Process**: Implement regular automated code reviews.")
-        recommendations.push("- **CI/CD Integration**: Incorporate security scanning in CI/CD pipelines.")
-        recommendations.push("- **Standards Documentation**: Establish and enforce secure coding standards.")
+        recommendations.push("- Code Improvements: Apply recommended security enhancements.")
+        recommendations.push("- Review Process: Implement regular automated code reviews.")
+        recommendations.push("- CI/CD Integration: Incorporate security scanning in CI/CD pipelines.")
+        recommendations.push("- Standards Documentation: Establish and enforce secure coding standards.")
       }
     }
 
     recommendations.push("## General Security Practices")
-    recommendations.push("- **Regular Assessments**: Conduct quarterly security assessments.")
-    recommendations.push("- **Monitoring & Logging**: Implement comprehensive security monitoring.")
-    recommendations.push("- **Team Training**: Provide regular security awareness training.")
-    recommendations.push("- **Asset Management**: Maintain an updated inventory of systems.")
-    recommendations.push("- **Incident Response**: Develop and test incident response plans.")
-    recommendations.push("- **Vulnerability Management**: Track and remediate vulnerabilities systematically.")
+    recommendations.push("- Regular Assessments: Conduct quarterly security assessments.")
+    recommendations.push("- Monitoring & Logging: Implement comprehensive security monitoring.")
+    recommendations.push("- Team Training: Provide regular security awareness training.")
+    recommendations.push("- Asset Management: Maintain an updated inventory of systems.")
+    recommendations.push("- Incident Response: Develop and test incident response plans.")
+    recommendations.push("- Vulnerability Management: Track and remediate vulnerabilities systematically.")
 
     return recommendations.join('\n')
   }
@@ -938,7 +926,7 @@ The overall security posture is rated as ${securityScore >= 80 ? 'EXCELLENT' : s
                 <span className="text-xl font-bold">Enhanced Security Report Export</span>
                 <div className="flex items-center gap-2 mt-1">
                   <Badge className="bg-primary/10 text-primary">
-                    Markdown Parsing
+                    Plain Text Parsing
                   </Badge>
                   <Badge className="bg-green-100 text-green-700">
                     Visual Charts
@@ -974,7 +962,7 @@ The overall security posture is rated as ${securityScore >= 80 ? 'EXCELLENT' : s
                   {progress < 20 && "Initializing report generation..."}
                   {progress >= 20 && progress < 40 && "Processing network scan results..."}
                   {progress >= 40 && progress < 70 && "Analyzing code review data..."}
-                  {progress >= 70 && progress < 90 && "Parsing markdown content..."}
+                  {progress >= 70 && progress < 90 && "Parsing plain text content..."}
                   {progress >= 90 && "Finalizing PDF document..."}
                 </div>
               </div>
@@ -989,7 +977,7 @@ The overall security posture is rated as ${securityScore >= 80 ? 'EXCELLENT' : s
                 <div className="space-y-2 text-sm">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-green-500" />
-                    <span>Complete markdown parsing with marked library</span>
+                    <span>Plain text parsing from markdown</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-green-500" />
@@ -1034,7 +1022,7 @@ The overall security posture is rated as ${securityScore >= 80 ? 'EXCELLENT' : s
 
             <div className="flex items-center justify-between pt-4 border-t border-border">
               <div className="text-sm text-muted-foreground">
-                Enhanced report with charts, markdown parsing, and professional styling
+                Enhanced report with charts, plain text parsing, and professional styling
               </div>
               <Button
                 onClick={generatePDF}
