@@ -85,23 +85,22 @@ export default function SolidityAnalysisSection({
       optimization: []
     }
 
-    if (results.slither_output?.results?.detectors) {
-      results.slither_output.results.detectors.forEach(detector => {
-        const impact = detector.impact?.toLowerCase() || 'informational'
-        const confidence = detector.confidence?.toLowerCase() || 'medium'
-        
+    console.log(results)
+
+    if (results.vulnerabilities && Array.isArray(results.vulnerabilities)) {
+      results.vulnerabilities.forEach(vuln => {
+        const impact = vuln.impact?.toLowerCase() || 'informational'
+
         const finding = {
-          id: detector.check || 'unknown',
-          title: detector.description || 'No description available',
-          impact: detector.impact || 'Unknown',
-          confidence: detector.confidence || 'Medium',
-          elements: detector.elements || [],
-          markdown: detector.markdown || '',
-          first_markdown_element: detector.first_markdown_element || ''
+          id: vuln.id || 'unknown',
+          title: vuln.description || 'No description available',
+          impact: vuln.impact || 'Unknown',
+          confidence: vuln.confidence || 'Medium',
+          type: vuln.type || 'unknown',
+          patch: vuln.patch || 'No patch provided'
         }
 
-        // Categorize findings based on impact
-        switch(impact) {
+        switch (impact) {
           case 'high':
             findings.high.push(finding)
             break

@@ -11,9 +11,9 @@
             "source_mapping": {
               "start": 293,
               "length": 390,
-              "filename_relative": "contract.sol",
-              "filename_absolute": "/home/rohitprasanth/hackathon/null-scan/backend/blockchain/contract.sol",
-              "filename_short": "contract.sol",
+              "filename_relative": "uploads/solidity/20250525_120910_contract.sol",
+              "filename_absolute": "/home/exigent07/Hackathon/Null-Scan-Tool/backend/uploads/solidity/20250525_120910_contract.sol",
+              "filename_short": "uploads/solidity/20250525_120910_contract.sol",
               "is_dependency": false,
               "lines": [
                 13,
@@ -37,9 +37,9 @@
                 "source_mapping": {
                   "start": 57,
                   "length": 760,
-                  "filename_relative": "contract.sol",
-                  "filename_absolute": "/home/rohitprasanth/hackathon/null-scan/backend/blockchain/contract.sol",
-                  "filename_short": "contract.sol",
+                  "filename_relative": "uploads/solidity/20250525_120910_contract.sol",
+                  "filename_absolute": "/home/exigent07/Hackathon/Null-Scan-Tool/backend/uploads/solidity/20250525_120910_contract.sol",
+                  "filename_short": "uploads/solidity/20250525_120910_contract.sol",
                   "is_dependency": false,
                   "lines": [
                     4,
@@ -81,9 +81,9 @@
             "source_mapping": {
               "start": 505,
               "length": 50,
-              "filename_relative": "contract.sol",
-              "filename_absolute": "/home/rohitprasanth/hackathon/null-scan/backend/blockchain/contract.sol",
-              "filename_short": "contract.sol",
+              "filename_relative": "uploads/solidity/20250525_120910_contract.sol",
+              "filename_absolute": "/home/exigent07/Hackathon/Null-Scan-Tool/backend/uploads/solidity/20250525_120910_contract.sol",
+              "filename_short": "uploads/solidity/20250525_120910_contract.sol",
               "is_dependency": false,
               "lines": [
                 18
@@ -98,9 +98,9 @@
                 "source_mapping": {
                   "start": 293,
                   "length": 390,
-                  "filename_relative": "contract.sol",
-                  "filename_absolute": "/home/rohitprasanth/hackathon/null-scan/backend/blockchain/contract.sol",
-                  "filename_short": "contract.sol",
+                  "filename_relative": "uploads/solidity/20250525_120910_contract.sol",
+                  "filename_absolute": "/home/exigent07/Hackathon/Null-Scan-Tool/backend/uploads/solidity/20250525_120910_contract.sol",
+                  "filename_short": "uploads/solidity/20250525_120910_contract.sol",
                   "is_dependency": false,
                   "lines": [
                     13,
@@ -124,9 +124,9 @@
                     "source_mapping": {
                       "start": 57,
                       "length": 760,
-                      "filename_relative": "contract.sol",
-                      "filename_absolute": "/home/rohitprasanth/hackathon/null-scan/backend/blockchain/contract.sol",
-                      "filename_short": "contract.sol",
+                      "filename_relative": "uploads/solidity/20250525_120910_contract.sol",
+                      "filename_absolute": "/home/exigent07/Hackathon/Null-Scan-Tool/backend/uploads/solidity/20250525_120910_contract.sol",
+                      "filename_short": "uploads/solidity/20250525_120910_contract.sol",
                       "is_dependency": false,
                       "lines": [
                         4,
@@ -173,9 +173,9 @@
             "source_mapping": {
               "start": 613,
               "length": 24,
-              "filename_relative": "contract.sol",
-              "filename_absolute": "/home/rohitprasanth/hackathon/null-scan/backend/blockchain/contract.sol",
-              "filename_short": "contract.sol",
+              "filename_relative": "uploads/solidity/20250525_120910_contract.sol",
+              "filename_absolute": "/home/exigent07/Hackathon/Null-Scan-Tool/backend/uploads/solidity/20250525_120910_contract.sol",
+              "filename_short": "uploads/solidity/20250525_120910_contract.sol",
               "is_dependency": false,
               "lines": [
                 21
@@ -190,9 +190,9 @@
                 "source_mapping": {
                   "start": 293,
                   "length": 390,
-                  "filename_relative": "contract.sol",
-                  "filename_absolute": "/home/rohitprasanth/hackathon/null-scan/backend/blockchain/contract.sol",
-                  "filename_short": "contract.sol",
+                  "filename_relative": "uploads/solidity/20250525_120910_contract.sol",
+                  "filename_absolute": "/home/exigent07/Hackathon/Null-Scan-Tool/backend/uploads/solidity/20250525_120910_contract.sol",
+                  "filename_short": "uploads/solidity/20250525_120910_contract.sol",
                   "is_dependency": false,
                   "lines": [
                     13,
@@ -216,9 +216,9 @@
                     "source_mapping": {
                       "start": 57,
                       "length": 760,
-                      "filename_relative": "contract.sol",
-                      "filename_absolute": "/home/rohitprasanth/hackathon/null-scan/backend/blockchain/contract.sol",
-                      "filename_short": "contract.sol",
+                      "filename_relative": "uploads/solidity/20250525_120910_contract.sol",
+                      "filename_absolute": "/home/exigent07/Hackathon/Null-Scan-Tool/backend/uploads/solidity/20250525_120910_contract.sol",
+                      "filename_short": "uploads/solidity/20250525_120910_contract.sol",
                       "is_dependency": false,
                       "lines": [
                         4,
@@ -261,10 +261,10 @@
             }
           }
         ],
-        "description": "Reentrancy in ReentrancyVulnerable.withdraw() (contract.sol#13-22):\n\tExternal calls:\n\t- (sent,None) = msg.sender.call{value: amount}() (contract.sol#18)\n\tState variables written after the call(s):\n\t- balances[msg.sender] = 0 (contract.sol#21)\n\tReentrancyVulnerable.balances (contract.sol#5) can be used in cross function reentrancies:\n\t- ReentrancyVulnerable.balances (contract.sol#5)\n\t- ReentrancyVulnerable.deposit() (contract.sol#8-10)\n\t- ReentrancyVulnerable.withdraw() (contract.sol#13-22)\n",
-        "markdown": "Reentrancy in [ReentrancyVulnerable.withdraw()](contract.sol#L13-L22):\n\tExternal calls:\n\t- [(sent,None) = msg.sender.call{value: amount}()](contract.sol#L18)\n\tState variables written after the call(s):\n\t- [balances[msg.sender] = 0](contract.sol#L21)\n\t[ReentrancyVulnerable.balances](contract.sol#L5) can be used in cross function reentrancies:\n\t- [ReentrancyVulnerable.balances](contract.sol#L5)\n\t- [ReentrancyVulnerable.deposit()](contract.sol#L8-L10)\n\t- [ReentrancyVulnerable.withdraw()](contract.sol#L13-L22)\n",
-        "first_markdown_element": "contract.sol#L13-L22",
-        "id": "45ffc0e551f6e6e7d0dbe125571780e7cd4e74d9e43e588e854d7d007f1890c1",
+        "description": "Reentrancy in ReentrancyVulnerable.withdraw() (uploads/solidity/20250525_120910_contract.sol#13-22):\n\tExternal calls:\n\t- (sent,None) = msg.sender.call{value: amount}() (uploads/solidity/20250525_120910_contract.sol#18)\n\tState variables written after the call(s):\n\t- balances[msg.sender] = 0 (uploads/solidity/20250525_120910_contract.sol#21)\n\tReentrancyVulnerable.balances (uploads/solidity/20250525_120910_contract.sol#5) can be used in cross function reentrancies:\n\t- ReentrancyVulnerable.balances (uploads/solidity/20250525_120910_contract.sol#5)\n\t- ReentrancyVulnerable.deposit() (uploads/solidity/20250525_120910_contract.sol#8-10)\n\t- ReentrancyVulnerable.withdraw() (uploads/solidity/20250525_120910_contract.sol#13-22)\n",
+        "markdown": "Reentrancy in [ReentrancyVulnerable.withdraw()](uploads/solidity/20250525_120910_contract.sol#L13-L22):\n\tExternal calls:\n\t- [(sent,None) = msg.sender.call{value: amount}()](uploads/solidity/20250525_120910_contract.sol#L18)\n\tState variables written after the call(s):\n\t- [balances[msg.sender] = 0](uploads/solidity/20250525_120910_contract.sol#L21)\n\t[ReentrancyVulnerable.balances](uploads/solidity/20250525_120910_contract.sol#L5) can be used in cross function reentrancies:\n\t- [ReentrancyVulnerable.balances](uploads/solidity/20250525_120910_contract.sol#L5)\n\t- [ReentrancyVulnerable.deposit()](uploads/solidity/20250525_120910_contract.sol#L8-L10)\n\t- [ReentrancyVulnerable.withdraw()](uploads/solidity/20250525_120910_contract.sol#L13-L22)\n",
+        "first_markdown_element": "uploads/solidity/20250525_120910_contract.sol#L13-L22",
+        "id": "625474ae398f557059aeb0b5e248e0bfb0659949ab509d5e25e78f7de3810c91",
         "check": "reentrancy-eth",
         "impact": "High",
         "confidence": "Medium"
@@ -277,9 +277,9 @@
             "source_mapping": {
               "start": 32,
               "length": 23,
-              "filename_relative": "contract.sol",
-              "filename_absolute": "/home/rohitprasanth/hackathon/null-scan/backend/blockchain/contract.sol",
-              "filename_short": "contract.sol",
+              "filename_relative": "uploads/solidity/20250525_120910_contract.sol",
+              "filename_absolute": "/home/exigent07/Hackathon/Null-Scan-Tool/backend/uploads/solidity/20250525_120910_contract.sol",
+              "filename_short": "uploads/solidity/20250525_120910_contract.sol",
               "is_dependency": false,
               "lines": [
                 2
@@ -297,10 +297,10 @@
             }
           }
         ],
-        "description": "Version constraint ^0.8.0 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)\n\t- FullInlinerNonExpressionSplitArgumentEvaluationOrder\n\t- MissingSideEffectsOnSelectorAccess\n\t- AbiReencodingHeadOverflowWithStaticArrayCleanup\n\t- DirtyBytesArrayToStorage\n\t- DataLocationChangeInInternalOverride\n\t- NestedCalldataArrayAbiReencodingSizeValidation\n\t- SignedImmutables\n\t- ABIDecodeTwoDimensionalArrayMemory\n\t- KeccakCaching.\nIt is used by:\n\t- ^0.8.0 (contract.sol#2)\n",
-        "markdown": "Version constraint ^0.8.0 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)\n\t- FullInlinerNonExpressionSplitArgumentEvaluationOrder\n\t- MissingSideEffectsOnSelectorAccess\n\t- AbiReencodingHeadOverflowWithStaticArrayCleanup\n\t- DirtyBytesArrayToStorage\n\t- DataLocationChangeInInternalOverride\n\t- NestedCalldataArrayAbiReencodingSizeValidation\n\t- SignedImmutables\n\t- ABIDecodeTwoDimensionalArrayMemory\n\t- KeccakCaching.\nIt is used by:\n\t- [^0.8.0](contract.sol#L2)\n",
-        "first_markdown_element": "contract.sol#L2",
-        "id": "7a571d78575eb39c7790126c71c9fcbd5ff1132e1e5391a04d1e03bb36dcb992",
+        "description": "Version constraint ^0.8.0 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)\n\t- FullInlinerNonExpressionSplitArgumentEvaluationOrder\n\t- MissingSideEffectsOnSelectorAccess\n\t- AbiReencodingHeadOverflowWithStaticArrayCleanup\n\t- DirtyBytesArrayToStorage\n\t- DataLocationChangeInInternalOverride\n\t- NestedCalldataArrayAbiReencodingSizeValidation\n\t- SignedImmutables\n\t- ABIDecodeTwoDimensionalArrayMemory\n\t- KeccakCaching.\nIt is used by:\n\t- ^0.8.0 (uploads/solidity/20250525_120910_contract.sol#2)\n",
+        "markdown": "Version constraint ^0.8.0 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)\n\t- FullInlinerNonExpressionSplitArgumentEvaluationOrder\n\t- MissingSideEffectsOnSelectorAccess\n\t- AbiReencodingHeadOverflowWithStaticArrayCleanup\n\t- DirtyBytesArrayToStorage\n\t- DataLocationChangeInInternalOverride\n\t- NestedCalldataArrayAbiReencodingSizeValidation\n\t- SignedImmutables\n\t- ABIDecodeTwoDimensionalArrayMemory\n\t- KeccakCaching.\nIt is used by:\n\t- [^0.8.0](uploads/solidity/20250525_120910_contract.sol#L2)\n",
+        "first_markdown_element": "uploads/solidity/20250525_120910_contract.sol#L2",
+        "id": "10af22592d805ffbb4d1f38b5ea4e85563e246a4afe1c482d131427d84ffa8dc",
         "check": "solc-version",
         "impact": "Informational",
         "confidence": "High"
@@ -313,9 +313,9 @@
             "source_mapping": {
               "start": 293,
               "length": 390,
-              "filename_relative": "contract.sol",
-              "filename_absolute": "/home/rohitprasanth/hackathon/null-scan/backend/blockchain/contract.sol",
-              "filename_short": "contract.sol",
+              "filename_relative": "uploads/solidity/20250525_120910_contract.sol",
+              "filename_absolute": "/home/exigent07/Hackathon/Null-Scan-Tool/backend/uploads/solidity/20250525_120910_contract.sol",
+              "filename_short": "uploads/solidity/20250525_120910_contract.sol",
               "is_dependency": false,
               "lines": [
                 13,
@@ -339,9 +339,9 @@
                 "source_mapping": {
                   "start": 57,
                   "length": 760,
-                  "filename_relative": "contract.sol",
-                  "filename_absolute": "/home/rohitprasanth/hackathon/null-scan/backend/blockchain/contract.sol",
-                  "filename_short": "contract.sol",
+                  "filename_relative": "uploads/solidity/20250525_120910_contract.sol",
+                  "filename_absolute": "/home/exigent07/Hackathon/Null-Scan-Tool/backend/uploads/solidity/20250525_120910_contract.sol",
+                  "filename_short": "uploads/solidity/20250525_120910_contract.sol",
                   "is_dependency": false,
                   "lines": [
                     4,
@@ -383,9 +383,9 @@
             "source_mapping": {
               "start": 505,
               "length": 50,
-              "filename_relative": "contract.sol",
-              "filename_absolute": "/home/rohitprasanth/hackathon/null-scan/backend/blockchain/contract.sol",
-              "filename_short": "contract.sol",
+              "filename_relative": "uploads/solidity/20250525_120910_contract.sol",
+              "filename_absolute": "/home/exigent07/Hackathon/Null-Scan-Tool/backend/uploads/solidity/20250525_120910_contract.sol",
+              "filename_short": "uploads/solidity/20250525_120910_contract.sol",
               "is_dependency": false,
               "lines": [
                 18
@@ -400,9 +400,9 @@
                 "source_mapping": {
                   "start": 293,
                   "length": 390,
-                  "filename_relative": "contract.sol",
-                  "filename_absolute": "/home/rohitprasanth/hackathon/null-scan/backend/blockchain/contract.sol",
-                  "filename_short": "contract.sol",
+                  "filename_relative": "uploads/solidity/20250525_120910_contract.sol",
+                  "filename_absolute": "/home/exigent07/Hackathon/Null-Scan-Tool/backend/uploads/solidity/20250525_120910_contract.sol",
+                  "filename_short": "uploads/solidity/20250525_120910_contract.sol",
                   "is_dependency": false,
                   "lines": [
                     13,
@@ -426,9 +426,9 @@
                     "source_mapping": {
                       "start": 57,
                       "length": 760,
-                      "filename_relative": "contract.sol",
-                      "filename_absolute": "/home/rohitprasanth/hackathon/null-scan/backend/blockchain/contract.sol",
-                      "filename_short": "contract.sol",
+                      "filename_relative": "uploads/solidity/20250525_120910_contract.sol",
+                      "filename_absolute": "/home/exigent07/Hackathon/Null-Scan-Tool/backend/uploads/solidity/20250525_120910_contract.sol",
+                      "filename_short": "uploads/solidity/20250525_120910_contract.sol",
                       "is_dependency": false,
                       "lines": [
                         4,
@@ -467,10 +467,10 @@
             }
           }
         ],
-        "description": "Low level call in ReentrancyVulnerable.withdraw() (contract.sol#13-22):\n\t- (sent,None) = msg.sender.call{value: amount}() (contract.sol#18)\n",
-        "markdown": "Low level call in [ReentrancyVulnerable.withdraw()](contract.sol#L13-L22):\n\t- [(sent,None) = msg.sender.call{value: amount}()](contract.sol#L18)\n",
-        "first_markdown_element": "contract.sol#L13-L22",
-        "id": "1e9f33c5f4a062b9e11908bd304b189b712647f93e13ec97e3891f31ecb68545",
+        "description": "Low level call in ReentrancyVulnerable.withdraw() (uploads/solidity/20250525_120910_contract.sol#13-22):\n\t- (sent,None) = msg.sender.call{value: amount}() (uploads/solidity/20250525_120910_contract.sol#18)\n",
+        "markdown": "Low level call in [ReentrancyVulnerable.withdraw()](uploads/solidity/20250525_120910_contract.sol#L13-L22):\n\t- [(sent,None) = msg.sender.call{value: amount}()](uploads/solidity/20250525_120910_contract.sol#L18)\n",
+        "first_markdown_element": "uploads/solidity/20250525_120910_contract.sol#L13-L22",
+        "id": "27514c07b553e71e98be8551754fe7b1211e8b3e794657c979a538cda00d4f57",
         "check": "low-level-calls",
         "impact": "Informational",
         "confidence": "High"
